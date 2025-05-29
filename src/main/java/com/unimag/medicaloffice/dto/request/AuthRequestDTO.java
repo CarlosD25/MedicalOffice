@@ -4,27 +4,16 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
-import java.time.LocalTime;
-
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class DoctorRequestDTO {
-
-    @NotBlank
-    private String fullName;
-
+public class AuthRequestDTO {
     @Email
     private String email;
-
     @NotBlank
     private String password;
 
-    private String specialty;
-
-    private LocalTime availableFrom;
-
-    private LocalTime availableTo;
+    // getters y setters
 }
