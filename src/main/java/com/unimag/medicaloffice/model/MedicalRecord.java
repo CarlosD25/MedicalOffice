@@ -25,7 +25,7 @@ public class MedicalRecord {
     private Appointment appointment;
 
     @ManyToOne(optional = false,fetch = FetchType.LAZY)
-    @JoinColumn(name = "patient",referencedColumnName = "id")
+    @JoinColumn(name = "patientId",referencedColumnName = "id")
     private Patient patient;
 
     @NotBlank

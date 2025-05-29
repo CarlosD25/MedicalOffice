@@ -12,9 +12,12 @@ import java.time.LocalDateTime;
 @Builder
 public class AppointmentResponseDTO {
     private Long id;
-    private PatientResponseDTO patient;
-    private DoctorResponseDTO doctor;
-    private ConsultRoomResponseDTO consultRoom;
+    private Long patientId;
+    private String patientName;
+    private Long doctorId;
+    private String doctorName;
+    private Long consultRoomId;
+    private String consultRoomName;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     private Status status;

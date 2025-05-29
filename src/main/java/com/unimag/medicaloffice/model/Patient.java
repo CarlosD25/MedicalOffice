@@ -5,8 +5,6 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
-import java.util.Set;
-
 @Entity
 @Table(name = "patients")
 @Getter

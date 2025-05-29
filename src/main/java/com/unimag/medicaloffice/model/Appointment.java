@@ -38,6 +38,7 @@ public class Appointment {
     private LocalDateTime endTime;
 
     @Enumerated(EnumType.STRING)
-    private Status status= Status.SCHEDULED;
+    @Builder.Default
+    private Status status = Status.SCHEDULED;
 
 }
