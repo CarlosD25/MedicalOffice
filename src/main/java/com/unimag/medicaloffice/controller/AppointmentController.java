@@ -1,6 +1,7 @@
 package com.unimag.medicaloffice.controller;
 
 import com.unimag.medicaloffice.dto.request.AppointmentRequestDTO;
+import com.unimag.medicaloffice.dto.request.AppointmentUpdateDTO;
 import com.unimag.medicaloffice.dto.response.AppointmentResponseDTO;
 import com.unimag.medicaloffice.service.AppointmentService;
 import lombok.RequiredArgsConstructor;
@@ -42,6 +43,11 @@ public class AppointmentController {
     @PutMapping("/{id}")
     public ResponseEntity<AppointmentResponseDTO> update(@PathVariable Long id, @RequestBody AppointmentRequestDTO appointmentRequestDTO) {
         return ResponseEntity.ok(appointmentService.update(id, appointmentRequestDTO));
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<AppointmentResponseDTO> partialUpdate(@PathVariable Long id, @RequestBody AppointmentUpdateDTO updateDTO) {
+        return ResponseEntity.ok(appointmentService.partialUpdate(id, updateDTO));
     }
 
     @DeleteMapping("/{id}")

@@ -18,6 +18,4 @@ public interface MedicalRecordMapper {
     @Mapping(target = "patientId", source = "patient.id")
     MedicalRecordResponseDTO toDTO(MedicalRecord entity);
 
-    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    void updateEntity(@MappingTarget MedicalRecord entity, MedicalRecordRequestDTO dto);
 }

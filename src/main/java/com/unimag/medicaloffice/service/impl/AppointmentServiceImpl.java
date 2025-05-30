@@ -1,6 +1,7 @@
 package com.unimag.medicaloffice.service.impl;
 
 import com.unimag.medicaloffice.dto.request.AppointmentRequestDTO;
+import com.unimag.medicaloffice.dto.request.AppointmentUpdateDTO;
 import com.unimag.medicaloffice.dto.response.AppointmentResponseDTO;
 import com.unimag.medicaloffice.exception.ScheduleConflictException;
 import com.unimag.medicaloffice.mapper.AppointmentMapper;
@@ -157,5 +158,39 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     }
 
+    @Override
+    public AppointmentResponseDTO partialUpdate(Long id, AppointmentUpdateDTO updateDTO) {
+        Appointment appointment = appointmentRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("No appointment found with id " + id));
+
+        // Solo actualizar los campos que no son nulos
+        if (updateDTO.getConsultRoomId() != null) {
+            ConsultRoom consultRoom = consultRoomRepository
+                    .findById(updateDTO.getConsultRoomId())
+                    .orElseThrow(() -> new EntityNotFoundException("ConsultRoom not found"));
+            appointment.setConsultRoom(consultRoom);
+        }
+
+        if (updateDTO.getStartTime() != null) {
+            appointment.setStartTime(updateDTO.getStartTime());
+        }
+
+        if (updateDTO.getEndTime() != null) {
+            appointment.setEndTime(updateDTO.getEndTime());
+        }
+
+        if (updateDTO.getStatus() != null) {
+            appointment.setStatus(updateDTO.getStatus());
+        }
+
+        // Validar la cita solo si se modificaron las fechas o la sala de consulta
+        if (updateDTO.getStartTime() != null || updateDTO.getEndTime() != null || updateDTO.getConsultRoomId() != null) {
+            if (!isAppointmentUpdateValid(appointment)) {
+                throw new ScheduleConflictException("The appointment update is not available.");
+            }
+        }
+
+        return appointmentMapper.toDTO(appointmentRepository.save(appointment));
+    }
 
 }

@@ -1,6 +1,7 @@
 package com.unimag.medicaloffice.service;
 
 import com.unimag.medicaloffice.dto.request.AppointmentRequestDTO;
+import com.unimag.medicaloffice.dto.request.AppointmentUpdateDTO;
 import com.unimag.medicaloffice.dto.response.AppointmentResponseDTO;
 import com.unimag.medicaloffice.model.Appointment;
 
@@ -14,6 +15,7 @@ public interface AppointmentService {
     AppointmentResponseDTO get(Long id);
     List<AppointmentResponseDTO> getAll();
     AppointmentResponseDTO update(Long id,AppointmentRequestDTO appointmentRequestDTO);
+    AppointmentResponseDTO partialUpdate(Long id, AppointmentUpdateDTO updateDTO);
     void delete(Long id);
     boolean isAppointmentValid(Appointment appointment);
     boolean isAppointmentUpdateValid(Appointment appointment);
