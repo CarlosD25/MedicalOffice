@@ -29,8 +29,7 @@ public class DoctorServiceImpl implements DoctorService {
     @Transactional
     public DoctorResponseDTO create(DoctorRequestDTO doctorRequestDTO) {
         Doctor doctor = doctorMapper.toEntity(doctorRequestDTO);
-        
-        // Crear el usuario asociado al doctor
+
         doctor.setUser(userService.createUser(
             doctorRequestDTO.getEmail(),
             doctorRequestDTO.getPassword(),
@@ -63,7 +62,6 @@ public class DoctorServiceImpl implements DoctorService {
         doctor.setAvailableFrom(doctorRequestDTO.getAvailableFrom());
         doctor.setAvailableTo(doctorRequestDTO.getAvailableTo());
         
-        // Actualizar el usuario asociado
         if (doctor.getUser() != null) {
             doctor.setUser(userService.updateUser(
                 doctor.getUser(),
