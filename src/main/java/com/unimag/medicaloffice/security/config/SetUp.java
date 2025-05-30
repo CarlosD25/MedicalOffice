@@ -56,11 +56,27 @@ public class SetUp implements ApplicationListener<ContextRefreshedEvent> {
             }
         }
     }
+    @Transactional
+    public void createUser(){
+        User user = new User();
+        if(!userRepository.existsByEmail("user@user.com")){
+            Optional<Role> roles = rolesRepository.findByRol(Rol.ROLE_DOCTOR);
+            if(roles.isPresent()){
+                Set<Role> roleSet = new HashSet<>();
+                roleSet.add(roles.get());
+                user.setRoles(roleSet);
+                user.setEmail("user@user.com");
+                user.setPassword(passwordEncoder.encode("user"));
+                userRepository.save(user);
+            }
+        }
+    }
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
         createRoleIfNotExist(Rol.ROLE_ADMIN);
         createRoleIfNotExist(Rol.ROLE_DOCTOR);
         createAdmin();
+        createUser();
     }
 }

@@ -9,6 +9,7 @@ import lombok.*;
 @Builder
 public class ConsultRoomResponseDTO {
     private Long id;
+    private String name;
     private Integer floor;
     private String description;
 }
