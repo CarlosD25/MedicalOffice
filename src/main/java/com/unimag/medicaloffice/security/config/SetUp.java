@@ -15,7 +15,6 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-
 @Component
 @Transactional
 public class SetUp implements ApplicationListener<ContextRefreshedEvent> {
